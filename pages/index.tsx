@@ -7,6 +7,7 @@ import { Todo } from '../interfaces';
 import Header from '../components/header';
 import AddForm from '../components/addForm';
 import { useTodoList } from '../hooks/useTodoList';
+import BeatLoader from 'react-spinners/BeatLoader';
 
 export default function Home() {
   return (
@@ -18,7 +19,19 @@ export default function Home() {
 
 const TodoList = () => {
   const { todoList, isLoading } = useTodoList();
-  if (isLoading) return <div>loading...</div>;
+  const loadingStyle = {
+    position: 'fixed' as 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  };
+
+  if (isLoading)
+    return (
+      <div style={loadingStyle}>
+        <BeatLoader color='#0C9FF2' size={20} />
+      </div>
+    );
 
   return (
     <div>

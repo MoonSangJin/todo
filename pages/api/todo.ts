@@ -37,6 +37,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } else {
       const list = await axios.get('');
 
+      list.data.records.sort(
+        (a: string, b: string) =>
+          new Date(a['createdTime']).getTime() -
+          new Date(b['createdTime']).getTime()
+      );
       const records: Todo[] = list.data.records;
       res.status(200).json({ records: records });
     }

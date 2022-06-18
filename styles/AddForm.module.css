@@ -1,6 +1,4 @@
 .addForm {
-  position: fixed;
-  bottom: 10vh;
   height: 80px;
   background-color: white;
   display: flex;
