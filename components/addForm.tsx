@@ -12,7 +12,7 @@ const AddForm = () => {
     if (inputRef.current) inputRef.current.value = '';
   };
 
-  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
+  const onKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') addTodo();
   };
 
@@ -26,7 +26,7 @@ const AddForm = () => {
         className={styles.addInput}
         type='text'
         placeholder='Create a new Todo'
-        onKeyDown={onKeyDown}
+        onKeyPress={onKeyPress}
       />
     </div>
   );
