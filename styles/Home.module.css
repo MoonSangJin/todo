@@ -1,0 +1,84 @@
+.container {
+  width: 500px;
+  height: 80vh;
+  overflow: auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  -webkit-box-shadow: 6px 7px 5px 2px rgba(94, 94, 94, 0.72);
+  -moz-box-shadow: 6px 7px 5px 2px rgba(94, 94, 94, 0.72);
+  box-shadow: 6px 7px 5px 2px rgba(94, 94, 94, 0.72);
+}
+
+.todo {
+  list-style: none;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.yet {
+  color: black;
+}
+.done {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.todoName {
+  font-size: 30px;
+  margin-right: 20px;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+}
+
+.btnDelete {
+  font-size: 22px;
+}
+
+.btnCheck {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #2096f3;
+  border-radius: 50%;
+}
+
+.btnCheck.done {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-image: url(../public/check.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.btnDelete.done {
+  color: black;
+}
+
+@media screen and (max-width: 400px) {
+  .container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .todoName {
+    font-size: 23px;
+  }
+  .btnCheck,
+  .btnCheck.done {
+    width: 22px;
+    height: 22px;
+  }
+  .btnDelete {
+    font-size: 18px;
+  }
+}
