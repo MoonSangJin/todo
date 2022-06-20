@@ -18,7 +18,7 @@ export default function Home() {
   if (status === 'unauthenticated') {
     return (
       <>
-        <strong>Welcome to Jin's ToDoList</strong>
+        <strong>Welcome to Jin&apos ToDoList</strong>
         <Image
           src={naverLoginButtonImage}
           alt='NaverLoginButton'
