@@ -12,20 +12,32 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import naverLoginButtonImage from '../public/naverLogin/btnG_축약형.png';
 import Image from 'next/image';
 
+const loadingStyle = {
+  position: 'fixed' as 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+};
+
 export default function Home() {
   const { data: session, status } = useSession();
 
   if (status === 'unauthenticated') {
     return (
-      <>
-        <strong>Welcome to SangJin ToDoList</strong>
+      <div style={loadingStyle}>
+        <div
+          style={{ fontSize: '2rem', textAlign: 'center', fontWeight: 'bold' }}
+        >
+          Jin ToDoList
+        </div>
         <Image
           src={naverLoginButtonImage}
           alt='NaverLoginButton'
-          sizes='10vw'
+          width={300}
+          height={120}
           onClick={() => signIn('naver')}
         />
-      </>
+      </div>
     );
   }
 
@@ -38,12 +50,6 @@ export default function Home() {
 
 const TodoList = () => {
   const { todoList, isLoading } = useTodoList();
-  const loadingStyle = {
-    position: 'fixed' as 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  };
 
   return isLoading ? (
     <div style={loadingStyle}>
