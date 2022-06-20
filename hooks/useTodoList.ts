@@ -60,7 +60,7 @@ export function useTodoList() {
 
   const refresh = () => {
     //queryClient.invalidateQueries(key);
-    todoListQuery.refetch;
+    todoListQuery.refetch();
   };
 
   useEffect(() => {
