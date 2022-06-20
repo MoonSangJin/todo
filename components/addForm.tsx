@@ -6,13 +6,13 @@ const AddForm = () => {
   const { addNewTodo } = useTodoList();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const addTodo = (): void => {
+  const addTodo = () => {
     const name = inputRef.current?.value;
     name && addNewTodo(name);
     if (inputRef.current) inputRef.current.value = '';
   };
 
-  const onKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
+  const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') addTodo();
   };
 

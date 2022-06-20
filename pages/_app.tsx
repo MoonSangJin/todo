@@ -8,19 +8,28 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { SessionProvider } from 'next-auth/react';
 
 const queryClient = new QueryClient();
 
-function MyApp({ Component, pageProps }: AppProps) {
+declare global {
+  interface Window {
+    naver: any;
+  }
+}
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider>
-          <Component {...pageProps} />
-        </ChakraProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </RecoilRoot>
+    <SessionProvider session={session}>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <ChakraProvider>
+            <Component {...pageProps} />
+          </ChakraProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </RecoilRoot>
+    </SessionProvider>
   );
 }
 

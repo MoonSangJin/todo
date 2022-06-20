@@ -59,7 +59,8 @@ export function useTodoList() {
   );
 
   const refresh = () => {
-    queryClient.invalidateQueries(key);
+    //queryClient.invalidateQueries(key);
+    todoListQuery.refetch;
   };
 
   useEffect(() => {
@@ -72,7 +73,7 @@ export function useTodoList() {
         isClosable: true,
       });
     }
-  }, [todoListQuery.isSuccess]);
+  }, [toast, todoListQuery.isSuccess]);
 
   return {
     todoList: todoListQuery.isSuccess

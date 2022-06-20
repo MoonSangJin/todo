@@ -1,7 +1,11 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import styles from '../styles/Header.module.css';
+import { useSession, signOut } from 'next-auth/react';
+import Image from 'next/image';
+import naverLogOutButtonImage from '../public/naverLogin/btnG_로그아웃.png';
 
 const Header = (props: { totalCount: number }) => {
+  const { data: session } = useSession();
   const { totalCount } = props;
 
   const today = new Date();
@@ -37,6 +41,24 @@ const Header = (props: { totalCount: number }) => {
 
   return (
     <header className={styles.header}>
+      <section>
+        <Image
+          src={naverLogOutButtonImage}
+          alt='naverLogOut'
+          width={100}
+          height={40}
+          onClick={() => signOut()}
+        />
+        <div style={{ display: 'flex' }}>
+          <Image
+            src={session.user.image}
+            alt='profileImage'
+            width={100}
+            height={100}
+          />
+        </div>
+        <strong>Welcome {session.user.name}</strong>
+      </section>
       <section className={styles.todayInfo}>
         <div className={styles.todayInfoLeft}>
           <span className={styles.date}>{date}</span>

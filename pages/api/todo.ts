@@ -5,6 +5,7 @@ import { Todo } from '../../interfaces';
 
 axios.defaults.baseURL =
   'https://api.airtable.com/v0/appOws7mGhlwG6Fbo/Table%201';
+
 axios.interceptors.request.use(async (config) => {
   if (!config.headers['Authorization']) {
     config.headers[
@@ -12,7 +13,6 @@ axios.interceptors.request.use(async (config) => {
     ] = `Bearer ${process.env.NEXT_PUBLIC_AIRTABLE_KEY}`;
   }
   config.headers['Content-Type'] = 'application/json';
-
   return config;
 });
 
@@ -42,6 +42,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           new Date(a['createdTime']).getTime() -
           new Date(b['createdTime']).getTime()
       );
+
       const records: Todo[] = list.data.records;
       res.status(200).json({ records: records });
     }

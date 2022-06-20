@@ -8,8 +8,27 @@ import Header from '../components/header';
 import AddForm from '../components/addForm';
 import { useTodoList } from '../hooks/useTodoList';
 import BeatLoader from 'react-spinners/BeatLoader';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import naverLoginButtonImage from '../public/naverLogin/btnG_축약형.png';
+import Image from 'next/image';
 
 export default function Home() {
+  const { data: session, status } = useSession();
+
+  if (status === 'unauthenticated') {
+    return (
+      <>
+        <strong>Welcome to Jin's ToDoList</strong>
+        <Image
+          src={naverLoginButtonImage}
+          alt='NaverLoginButton'
+          sizes='10vw'
+          onClick={() => signIn('naver')}
+        />
+      </>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <TodoList />
@@ -26,14 +45,11 @@ const TodoList = () => {
     transform: 'translate(-50%, -50%)',
   };
 
-  if (isLoading)
-    return (
-      <div style={loadingStyle}>
-        <BeatLoader color='#0C9FF2' size={20} />
-      </div>
-    );
-
-  return (
+  return isLoading ? (
+    <div style={loadingStyle}>
+      <BeatLoader color='#0C9FF2' size={20} />
+    </div>
+  ) : (
     <div>
       <Header totalCount={todoList.length} />
       <ul className={styles.todos}>
