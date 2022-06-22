@@ -50,7 +50,6 @@ export default function Home() {
 
 const TodoList = () => {
   const { todoList, isLoading } = useTodoList();
-
   return isLoading ? (
     <div style={loadingStyle}>
       <BeatLoader color='#0C9FF2' size={20} />
@@ -66,7 +65,9 @@ const TodoList = () => {
               '/' +
               todo.fields.Name +
               '/' +
-              (todo.fields.Done ? 'O' : 'X')
+              (todo.fields.Done ? 'O' : 'X') +
+              '/' +
+              (todo.fields.Who ? 'yes' : 'no')
             }
             todo={todo}
           />
@@ -91,9 +92,9 @@ const Todo = (props: { todo: Todo }) => {
   };
 
   return (
-    <li className={`${styles.todo} ${checkType}`} onClick={handleUpdateTodo}>
+    <li className={`${styles.todo} ${checkType}`}>
       <span className={styles.todoName}>{todo.fields.Name}</span>
-      <div className={styles.btns}>
+      <div className={styles.btns} onClick={handleUpdateTodo}>
         <button
           className={`${styles.btnCheck} ${checkType}`}
           onClick={handleUpdateTodo}

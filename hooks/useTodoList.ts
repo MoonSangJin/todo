@@ -3,11 +3,13 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Todo } from '../interfaces';
+import { useSession } from 'next-auth/react';
 
 export function useTodoList() {
   const queryClient = useQueryClient();
   const toast = useToast();
   const key = 'todo-list';
+  const { data: session } = useSession();
 
   const todoListQuery = useQuery(key, () => {
     return axios.get('/api/todo');
@@ -19,6 +21,7 @@ export function useTodoList() {
         fields: {
           Name: name,
           Done: false,
+          Who: session.user.name,
         },
       }),
     {
@@ -59,8 +62,8 @@ export function useTodoList() {
   );
 
   const refresh = () => {
-    //queryClient.invalidateQueries(key);
-    todoListQuery.refetch();
+    queryClient.invalidateQueries(key);
+    // todoListQuery.refetch();
   };
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { Todo } from '../../interfaces';
 
 axios.defaults.baseURL =
-  'https://api.airtable.com/v0/appOws7mGhlwG6Fbo/Table%201';
+  'https://api.airtable.com/v0/appmS70CLmulvG5c3/Table%201';
 
 axios.interceptors.request.use(async (config) => {
   if (!config.headers['Authorization']) {
@@ -19,6 +19,7 @@ axios.interceptors.request.use(async (config) => {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === 'POST') {
+      console.log(req.body);
       const post = await axios.post('/', {
         records: [req.body],
       });
