@@ -20,7 +20,7 @@ const loadingStyle = {
 };
 
 export default function Home() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   if (status === 'unauthenticated') {
     return (
@@ -81,6 +81,7 @@ const TodoList = () => {
 const Todo = (props: { todo: Todo }) => {
   const { todo } = props;
   const { updateTodo, deleteTodo } = useTodoList();
+  const { data: session } = useSession();
 
   const checkType = todo.fields.Done === true ? styles.done : styles.yet;
 
@@ -89,6 +90,14 @@ const Todo = (props: { todo: Todo }) => {
       nextTodo.fields.Done = !todo.fields.Done;
     });
     updateTodo(updated);
+  };
+
+  const handleDeleteTodo = (id: string) => {
+    session.user.name === '문상진' ? deleteTodo(id) : warnToNoAdmin();
+  };
+
+  const warnToNoAdmin = () => {
+    alert(`${session.user.name}님 당신은 삭제 권한이 없습니다.`);
   };
 
   return (
@@ -101,9 +110,7 @@ const Todo = (props: { todo: Todo }) => {
         ></button>
         <button
           className={`${styles.btnDelete} ${checkType}`}
-          onClick={() => {
-            deleteTodo(todo.id);
-          }}
+          onClick={() => handleDeleteTodo(todo.id)}
         >
           <i className='fas fa-trash'></i>
         </button>

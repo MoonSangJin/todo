@@ -62,8 +62,8 @@ export function useTodoList() {
   );
 
   const refresh = () => {
-    queryClient.invalidateQueries(key);
-    // todoListQuery.refetch();
+    // queryClient.invalidateQueries(key);
+    todoListQuery.refetch();
   };
 
   useEffect(() => {
